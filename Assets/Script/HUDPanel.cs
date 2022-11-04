@@ -8,19 +8,24 @@ public class HUDPanel : MonoBehaviour
 
     public void drawerShare()
     {
-        StartCoroutine(TakeScreenshotAndShare());
-    }
+#if UNITY_ANDROID
+        
+     new NativeShare().AddFile(shareMsg)
+			.SetSubject("Native-Digital-AR").SetText(shareMsg).SetUrl("https://play.google.com/store/apps/details?id=" + Application.identifier)
+			.SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget))
+			.Share();
 
 
-
-    private IEnumerator TakeScreenshotAndShare()
-    {
-        yield return new WaitForEndOfFrame();
+#elif UNITY_IPHONE
         new NativeShare().AddFile(shareMsg)
-            .SetSubject("Native-Digital-AR").SetText(shareMsg).SetUrl("https://play.google.com/store/apps/details?id=" + Application.identifier)
-            .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget))
-            .Share();
+                   .SetSubject("Native-Digital-AR").SetText(shareMsg).SetUrl("https://apps.apple.com/us/app/native-digital-ar/id6444181283")
+                   .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget))
+                   .Share();
+#endif
     }
+
+
+
     public void drawerPrivacyPolicy()
     {
   Application.OpenURL("https://euphoriaxr.com/privacy-policy-2/");
@@ -41,7 +46,8 @@ public class HUDPanel : MonoBehaviour
 
 
 #elif UNITY_IPHONE
- Application.OpenURL("itms-apps://itunes.apple.com/app/com.DefaultCompany.MeshFlix");
+
 #endif
+        UnityEngine.iOS.Device.RequestStoreReview();
     }
 }

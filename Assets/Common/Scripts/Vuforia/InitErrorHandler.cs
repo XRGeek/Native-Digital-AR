@@ -96,7 +96,7 @@ public class InitErrorHandler : MonoBehaviour
         mErrorMessage = "<color=red>" + errorCode.ToString().Replace("_", " ") + "</color>\n\n" + mErrorMessage;
         var errorTextConsole = mErrorMessage.Replace("<color=red>", "").Replace("</color>", "");
         Debug.LogError("Vuforia initialization failed: " + errorCode + "\n\n" + errorTextConsole);
-        MessageBox.DisplayMessageBox(ERROR_TITLE, mErrorMessage, true, OnErrorDialogClose);
+        MessageBox.DisplayMessageBox(ERROR_TITLE, mErrorMessage, false, OnErrorDialogClose);
     }
 
     string GetKeyInfo()

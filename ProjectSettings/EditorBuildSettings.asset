@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/SamplesResources/Scenes/3-CloudReco.unity
     guid: e434bc354d6d54b899b4fbf77b3118a3
   - enabled: 1
-    path: Assets/Scenes/IntroScene.unity
-    guid: b49e9e9b494f148319b7a8d9894e543f
-  - enabled: 1
     path: Assets/Scenes/CloudAR.unity
     guid: 5dd9356b31f214aa292d08bc8bfb0211
+  - enabled: 0
+    path: Assets/Scenes/IntroScene.unity
+    guid: b49e9e9b494f148319b7a8d9894e543f
   m_configObjects: {}

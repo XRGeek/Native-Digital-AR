@@ -26,8 +26,8 @@ namespace NatSuite.Examples {
 
         private void Awake()
         {
-            videoHeight = Screen.height / 2;
-            videoWidth = Screen.width / 2;
+            videoHeight = Screen.height;
+            videoWidth = Screen.width;
         }
         private IEnumerator Start () {
             // Start microphone
@@ -70,10 +70,14 @@ namespace NatSuite.Examples {
             var path = await recorder.FinishWriting();
 
             var payload = new SharePayload();
+            Debug.Log(path);
             payload.AddMedia(path);
             var success = await payload.Commit();
+            Debug.Log($"Successfully shared items: {success}");
 
-
+//#if !UNITY_STANDALONE
+//            Handheld.PlayFullScreenMovie($"file://{path}");
+//#endif
         }
     }
 }

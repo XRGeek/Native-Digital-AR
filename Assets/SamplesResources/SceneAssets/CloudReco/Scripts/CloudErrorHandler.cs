@@ -61,7 +61,7 @@ public class CloudErrorHandler : MonoBehaviour
 
         Debug.LogError("OnInitError() - Initialization Error: " + initError + "\n\n" + errorTextConsole);
 
-        MessageBox.DisplayMessageBox(mErrorTitle, mErrorMessage, true, CloseDialog);
+        MessageBox.DisplayMessageBox(mErrorTitle, mErrorMessage, false, CloseDialog);
     }
 
     /// <summary>
@@ -114,7 +114,7 @@ public class CloudErrorHandler : MonoBehaviour
 
         Debug.LogError("OnUpdateError() - Update Error: " + updateError + "\n\n" + errorTextConsole);
 
-        MessageBox.DisplayMessageBox(mErrorTitle, mErrorMessage, true, CloseDialog);
+        MessageBox.DisplayMessageBox(mErrorTitle, mErrorMessage, false, CloseDialog);
     }
 
     public void CloseDialog()
