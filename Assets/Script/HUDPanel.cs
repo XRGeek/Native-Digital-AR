@@ -28,7 +28,7 @@ public class HUDPanel : MonoBehaviour
 
     public void drawerPrivacyPolicy()
     {
-  Application.OpenURL("https://euphoriaxr.com/privacy-policy-2/");
+  Application.OpenURL("https://www.ndpa.ch/privacy-policy");
     }
     public void drawerTermsAndCondition()
     {
