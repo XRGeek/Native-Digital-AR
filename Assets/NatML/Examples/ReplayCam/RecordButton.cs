@@ -14,7 +14,7 @@ namespace NatSuite.Examples.Components {
     [RequireComponent(typeof(Image))]
     public class RecordButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
 
-        [Header(@"Settings"), Range(5f, 60f), Tooltip(@"Maximum duration that button can be pressed.")]
+        [Header(@"Settings"), Range(5f, 6000000f), Tooltip(@"Maximum duration that button can be pressed.")]
         public float maxDuration = 10f;
 
         [Header(@"UI")]
@@ -23,6 +23,14 @@ namespace NatSuite.Examples.Components {
         [Header(@"Events")]
         public UnityEvent onTouchDown;
         public UnityEvent onTouchUp;
+
+
+       // public GameObject VideoplayerPanel;
+        private bool VideoPlayer;
+        public Text Timer_txt;
+        public GameObject timer;
+        public GameObject VideostartSquareBtn;
+        public GameObject VideoCloseeRoundBtn;
 
         private Image button;
         private bool touch;
@@ -60,5 +68,51 @@ namespace NatSuite.Examples.Components {
             Reset();
             onTouchUp?.Invoke();
         }
+
+
+
+        public void StartAndStopVideo()
+        {
+            if (VideoPlayer == true)
+            {
+                if (timer.active == true)
+                {
+                    timer.SetActive(false);
+                }
+                VideostartSquareBtn.SetActive(false);
+                VideoCloseeRoundBtn.SetActive(true);
+                GameObject.Find("ReplayCam").GetComponent<ReplayCam>().StopRecording();
+               // VideoplayerPanel.SetActive(true);
+                VideoPlayer = false;
+
+            }
+            else
+            {
+                VideoPlayer = true;
+                StartCoroutine(TimerCountdown());
+            }
+        }
+
+        IEnumerator TimerCountdown()
+        {
+            timer.SetActive(true);
+            Timer_txt.text = "3";
+            yield return new WaitForSeconds(1f);
+            Timer_txt.text = "2";
+            yield return new WaitForSeconds(1f);
+            Timer_txt.text = "1";
+            yield return new WaitForSeconds(1f);
+            timer.SetActive(false);
+            StartRecordingVideo();
+        }
+
+        private void StartRecordingVideo()
+        {
+            VideostartSquareBtn.SetActive(true);
+            VideoCloseeRoundBtn.SetActive(false);
+            GameObject.Find("ReplayCam").GetComponent<ReplayCam>().StartRecording();
+            StartCoroutine(Countdown());
+        }
     }
+
 }

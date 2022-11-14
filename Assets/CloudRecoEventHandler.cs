@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Vuforia;
 using RenderHeads.Media.AVProVideo;
+using System.Collections;
 
 
 /// <summary>
@@ -19,9 +20,13 @@ using RenderHeads.Media.AVProVideo;
 public class CloudRecoEventHandler : MonoBehaviour
 {
     CloudRecoBehaviour mCloudRecoBehaviour;
+
+
     private GameObject objectToFind;
     public MediaPlayer mediaPlayer;
+    public GameObject VideoRender;
 
+ 
     /// <summary>
     /// Can be set in the Unity inspector to reference a ImageTargetBehaviour 
     /// that is used for augmentations of new cloud reco results.
@@ -115,28 +120,9 @@ public class CloudRecoEventHandler : MonoBehaviour
         //get url for AVplayer
         objectToFind = GameObject.FindGameObjectWithTag("AVvideoPlayer");
         mediaPlayer = objectToFind.GetComponent<MediaPlayer>();
-
-       
         mediaPlayer.OpenMedia(new MediaPath(cloudRecoSearchResult.MetaData, MediaPathType.AbsolutePathOrURL));
-        mediaPlayer.Play();
-
-        //mediaPlayer.Events.AddListener(HandleEvent);
-
-
-        //// This method is called whenever there is an event from the MediaPlayer
-        //void HandleEvent(MediaPlayer mp, MediaPlayerEvent.EventType eventType, ErrorCode code)
-        //{
-        //    Debug.Log("MediaPlayer " + mp.name + " generated event: " + eventType.ToString());
-        //    if (eventType == MediaPlayerEvent.EventType.Error)
-        //    {
-        //        Debug.LogError("Error: " + code);
-        //    }
-        //    if (eventType == MediaPlayerEvent.EventType.FirstFrameReady)
-        //    {
-        //        mediaPlayer.Pause();
-        //    }
-        //}
-
+        VideoRender.SetActive(false);
+       // StartCoroutine(VideoPLayerCoroutine(cloudRecoSearchResult));
 
 
         // Changing CloudRecoBehaviour.enabled to false will call CloudRecoObserver.Deactivate()
@@ -149,7 +135,7 @@ public class CloudRecoEventHandler : MonoBehaviour
         // Pass the CloudRecoSearchResult to the ObserverEventHandler for processing
         OnTargetCreated?.Invoke(cloudRecoSearchResult);
     }
-    
+   
     void SetCloudActivityIconVisible(bool visible)
     {
         if (!CloudActivityIcon) 

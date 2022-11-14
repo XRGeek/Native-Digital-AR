@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class VideoHandler : MonoBehaviour
 {
-   // public GameObject videoPlayer;
-   //// public GameObject Loading;
+   public GameObject videoPlayer;
+    // //// public GameObject Loading;
 
 
-   //public void ShowVideoAfterDelay()
-   // {
-    
-   //  //   Loading.SetActive(true);
-   //     StartCoroutine(VideoPLayerCoroutine());
-   // }
-   // IEnumerator VideoPLayerCoroutine()
-   // {
-
-   //     yield return new WaitForSeconds(4);
-   //    // Loading.SetActive(false);
-   //     videoPlayer.SetActive(true);
-     
-   // }
+    //private void Start()
+    //{
+    //     videoPlayer.SetActive(false);
+    //}
+    //public void ShowVideoAfterDelay()
+    //{
+    //    StartCoroutine(VideoPLayerCoroutine());
+    //}
+    //IEnumerator VideoPLayerCoroutine()
+    //{
+        
+    //    yield return new WaitForSeconds(3);
+   
+    //    videoPlayer.SetActive(true);
+    //}
 
     //public void hideVideoPLayer()
     //{
