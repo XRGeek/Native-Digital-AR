@@ -26,11 +26,14 @@ namespace NatSuite.Examples.Components {
 
 
        // public GameObject VideoplayerPanel;
-        private bool VideoPlayer;
-        public Text Timer_txt;
-        public GameObject timer;
-        public GameObject VideostartSquareBtn;
-        public GameObject VideoCloseeRoundBtn;
+        private bool VideoPlayerClick;
+        public Text CountDown_txt;
+        public GameObject CountDown;
+        public GameObject VideoSquareBtn;
+        public GameObject VideoRoundBtn;
+        //timer
+       public GameObject TimerTxt;
+
 
         private Image button;
         private bool touch;
@@ -73,45 +76,63 @@ namespace NatSuite.Examples.Components {
 
         public void StartAndStopVideo()
         {
-            if (VideoPlayer == true)
+            if (VideoPlayerClick == true)
             {
-                if (timer.active == true)
+                if (VideoSquareBtn.active == false)
                 {
-                    timer.SetActive(false);
+                    CountDown.SetActive(false);
+                   
                 }
-                VideostartSquareBtn.SetActive(false);
-                VideoCloseeRoundBtn.SetActive(true);
                 GameObject.Find("ReplayCam").GetComponent<ReplayCam>().StopRecording();
-               // VideoplayerPanel.SetActive(true);
-                VideoPlayer = false;
+                TimerTxt.SetActive(false);
+                VideoSquareBtn.SetActive(false);
+                VideoRoundBtn.SetActive(true);
+                TimerScript.TimeLeft = 0;
+                //VideoplayerPanel.SetActive(true);
+                VideoPlayerClick = false;
 
             }
             else
             {
-                VideoPlayer = true;
-                StartCoroutine(TimerCountdown());
+                VideoPlayerClick = true;
+                //StartCoroutine(TimerCountdown());
+                StartRecordingVideo();
             }
         }
 
-        IEnumerator TimerCountdown()
-        {
-            timer.SetActive(true);
-            Timer_txt.text = "3";
-            yield return new WaitForSeconds(1f);
-            Timer_txt.text = "2";
-            yield return new WaitForSeconds(1f);
-            Timer_txt.text = "1";
-            yield return new WaitForSeconds(1f);
-            timer.SetActive(false);
-            StartRecordingVideo();
-        }
+        //IEnumerator TimerCountdown()
+        //{
+            //CountDown.SetActive(true);
+            //CountDown_txt.text = "3";
+            //yield return new WaitForSeconds(1f);
+            //CountDown_txt.text = "2";
+            //yield return new WaitForSeconds(1f);
+            //CountDown_txt.text = "1";
+            //yield return new WaitForSeconds(1f);
+            //CountDown.SetActive(false);
+        
+       // }
 
         private void StartRecordingVideo()
         {
-            VideostartSquareBtn.SetActive(true);
-            VideoCloseeRoundBtn.SetActive(false);
+
+            TimerScript.TimerOn = true;
+            VideoSquareBtn.SetActive(true);
+            VideoRoundBtn.SetActive(false);
+            TimerTxt.SetActive(true);
+            TimerScript.TimeLeft = 1;
             GameObject.Find("ReplayCam").GetComponent<ReplayCam>().StartRecording();
             StartCoroutine(Countdown());
+        }
+
+        public void TargetLost()
+        {
+            VideoSquareBtn.SetActive(false);
+            VideoRoundBtn.SetActive(true);
+            TimerScript.TimeLeft = 0;
+            VideoPlayerClick = false;
+
+
         }
     }
 
