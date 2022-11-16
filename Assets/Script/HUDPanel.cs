@@ -32,7 +32,7 @@ public class HUDPanel : MonoBehaviour
     }
     public void drawerTermsAndCondition()
     {
-      Application.OpenURL("https://euphoriaxr.com/about/");
+      Application.OpenURL("https://www.ndpa.ch/terms-and-conditions");
     }
     public void drawerContactUs()
     {
