@@ -7,9 +7,7 @@ public class VideoAspectRationManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //string meta = "http://www.euphoriaxr.com,1280,720";
-        //string[] metaData = meta.Split(',');
-        //AdjustRatio(float.Parse(metaData[1]), float.Parse(metaData[2]));
+        
     }
 
     // Update is called once per frame
@@ -24,18 +22,19 @@ public class VideoAspectRationManager : MonoBehaviour
 
         if (width == height)
         {
+            transform.localScale = new Vector3(1, transform.localScale.y, 1);
             return;
         }
 
         if (width < height)
         {
             ratio = height / width;
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z*ratio);
+            transform.localScale = new Vector3(1, transform.localScale.y, 1*ratio);
         }
         else
         {
             ratio = width / height;
-            transform.localScale = new Vector3(transform.localScale.x*ratio, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(1*ratio, transform.localScale.y, 1);
         }
     }
 }
