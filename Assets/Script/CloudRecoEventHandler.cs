@@ -26,6 +26,7 @@ public class CloudRecoEventHandler : MonoBehaviour
     public MediaPlayer mediaPlayer;
     public GameObject VideoRender;
 
+    public VideoAspectRationManager videoAspect;
  
     /// <summary>
     /// Can be set in the Unity inspector to reference a ImageTargetBehaviour 
@@ -116,11 +117,13 @@ public class CloudRecoEventHandler : MonoBehaviour
             Debug.Log("UniqueTargetId: " + cloudRecoSearchResult.UniqueTargetId);
         }
 
+        string[] metaData = cloudRecoSearchResult.MetaData.Split(',');
+        videoAspect.AdjustRatio(float.Parse(metaData[1]), float.Parse(metaData[2]));
 
         //get url for AVplayer
         objectToFind = GameObject.FindGameObjectWithTag("AVvideoPlayer");
         mediaPlayer = objectToFind.GetComponent<MediaPlayer>();
-        mediaPlayer.OpenMedia(new MediaPath(cloudRecoSearchResult.MetaData, MediaPathType.AbsolutePathOrURL));
+        mediaPlayer.OpenMedia(new MediaPath(metaData[0], MediaPathType.AbsolutePathOrURL));
         VideoRender.SetActive(false);
        // StartCoroutine(VideoPLayerCoroutine(cloudRecoSearchResult));
 
